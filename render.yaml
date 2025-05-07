@@ -11,14 +11,22 @@ services:
         value: 3002
       - key: HUGGINGFACE_API_KEY
         sync: false
+      - key: FRONTEND_URL
+        fromService:
+          type: static
+          name: resume-match-frontend
+          property: url
 
   - type: static
     name: resume-match-frontend
-    buildCommand: cd client && npm install && npm run build
-    staticPublishPath: client/.next
+    env: node
+    buildCommand: cd client && npm install && npm run build && npm run export
+    staticPublishPath: client/out
     envVars:
       - key: NEXT_PUBLIC_API_URL
         fromService:
           type: web
           name: resume-match-backend
-          property: url 
+          property: url
+      - key: NODE_ENV
+        value: production 
