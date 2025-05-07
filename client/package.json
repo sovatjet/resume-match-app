@@ -9,12 +9,21 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emotion/cache": "11.11.0",
     "@emotion/react": "11.11.3",
     "@emotion/styled": "11.11.0",
+    "@mui/icons-material": "5.15.10",
     "@mui/material": "5.15.10",
+    "@types/lodash": "4.17.16",
+    "formidable": "3.5.4",
+    "lodash": "4.17.21",
     "next": "14.1.0",
+    "ollama": "0.5.15",
+    "openai": "4.28.0",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "react-dropzone": "14.3.8",
+    "serve": "14.2.1"
   },
   "devDependencies": {
     "@swc/cli": "0.3.9",
