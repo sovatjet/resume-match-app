@@ -16,11 +16,8 @@ services:
     env: node
     rootDir: client
     nodeVersion: 18.19.1
-    buildCommand: |
-      export NODE_ENV=production
-      npm install --legacy-peer-deps
-      npm run build
-    staticPublishPath: out
+    buildCommand: cd client && npm install --legacy-peer-deps && npm run build
+    staticPublishPath: client/out
     envVars:
       - key: NODE_ENV
         value: production
