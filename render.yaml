@@ -21,9 +21,9 @@ services:
       npm install --legacy-peer-deps
       echo "Building application..."
       npm run build
-      echo "Exporting static site..."
-      cp -r out/* .
-    staticPublishPath: .
+      echo "Build complete. Contents of out directory:"
+      ls -la out
+    staticPublishPath: out
     envVars:
       - key: NODE_ENV
         value: production
