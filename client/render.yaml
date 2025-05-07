@@ -2,7 +2,16 @@ services:
   - type: static
     name: resume-match-frontend
     env: node
-    buildCommand: npm install && npm run build
+    buildCommand: |
+      echo "Current directory: $(pwd)"
+      echo "Directory contents:"
+      ls -la
+      echo "Installing dependencies..."
+      npm install
+      echo "Building application..."
+      npm run build
+      echo "Build complete. Contents of out directory:"
+      ls -la out
     staticPublishPath: out
     envVars:
       - key: NODE_ENV
