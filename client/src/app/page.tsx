@@ -27,7 +27,7 @@ interface ChatMessage {
   content: string;
 }
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3002';
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://resume-match-backend.onrender.com';
 
 // Custom debounce hook
 function useDebounce<T extends (...args: any[]) => any>(
@@ -125,18 +125,30 @@ export default function Page() {
     setIsLoading(true);
     setResult(null);
     try {
+      console.log('Starting match request...');
+      console.log('Files:', { resume: resume.name, jobDesc: jobDescFile.name });
+      
       const formData = new FormData();
       formData.append("resume", resume);
       formData.append("jobDesc", jobDescFile);
+      
+      console.log('Sending request to:', `${API_BASE_URL}/api/match`);
       const response = await fetch(`${API_BASE_URL}/api/match`, {
         method: "POST",
         body: formData,
         signal: abortControllerRef.current.signal
       });
+      
+      console.log('Response status:', response.status);
       if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+        const errorText = await response.text();
+        console.error('Error response:', errorText);
+        throw new Error(`HTTP error! status: ${response.status}, body: ${errorText}`);
       }
+      
       const data = await response.json();
+      console.log('Received data:', data);
+      
       setResult(data);
       setChatMessages([{
         role: 'assistant',

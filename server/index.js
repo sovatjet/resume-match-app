@@ -11,7 +11,7 @@ const port = process.env.PORT || 3002;
 // Middleware
 app.use(cors({
   origin: process.env.NODE_ENV === 'production' 
-    ? [process.env.FRONTEND_URL] 
+    ? ['https://resume-match-frontend.onrender.com', 'http://localhost:3000'] 
     : ['http://localhost:3000', 'http://localhost:3001', 'http://localhost:3002', 'http://localhost:3003', 'http://localhost:3004', 'http://192.168.0.37:3000', 'http://192.168.0.37:3001', 'http://192.168.0.37:3002', 'http://192.168.0.37:3003', 'http://192.168.0.37:3004'],
   methods: ['GET', 'POST', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
@@ -44,6 +44,14 @@ app.post('/api/match', upload.fields([
 ]), async (req, res) => {
   try {
     console.log('Received match request');
+    console.log('Request headers:', req.headers);
+    console.log('Request files:', req.files);
+    
+    if (!req.files || !req.files.resume || !req.files.jobDesc) {
+      console.error('Missing files in request');
+      return res.status(400).json({ error: 'Resume and job description files are required' });
+    }
+
     // Mock response for now
     const mockResponse = {
       overallMatch: {
