@@ -1,0 +1,16 @@
+services:
+  - type: static
+    name: resume-match-frontend
+    env: node
+    buildCommand: |
+      pwd
+      ls -la
+      npm install
+      npm run build
+      npm run export
+    staticPublishPath: out
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: NEXT_PUBLIC_API_URL
+        value: https://resume-match-backend.onrender.com 
