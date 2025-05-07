@@ -7,7 +7,8 @@ const nextConfig = {
   env: {
     NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL,
   },
-  webpack: (config) => {
+  webpack: /** @type {(config: import('webpack').Configuration) => import('webpack').Configuration} */ (config) => {
+    config.resolve = config.resolve || {};
     config.resolve.fallback = {
       ...config.resolve.fallback,
       fs: false,
