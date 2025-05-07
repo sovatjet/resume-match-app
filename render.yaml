@@ -16,12 +16,19 @@ services:
     name: resume-match-frontend
     env: node
     buildCommand: |
+      #!/bin/bash
+      echo "Current directory: $(pwd)"
+      echo "Listing contents:"
       ls -la
-      pwd
+      echo "Changing to client directory..."
       cd client
+      echo "Client directory contents:"
       ls -la
+      echo "Installing dependencies..."
       npm install
+      echo "Building..."
       npm run build
+      echo "Exporting..."
       npm run export
     staticPublishPath: client/out
     envVarGroup: ResumeMatchApp
