@@ -15,9 +15,12 @@ services:
   - type: static
     name: resume-match-frontend
     env: node
-    rootDir: client
-    buildCommand: npm install && npm run build && npm run export
-    staticPublishPath: out
+    buildCommand: |
+      cd client
+      npm install
+      npm run build
+      npm run export
+    staticPublishPath: client/out
     envVarGroup: ResumeMatchApp
     envVars:
       - key: NODE_ENV
