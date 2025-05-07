@@ -10,11 +10,6 @@ services:
         value: production
       - key: PORT
         value: 3002
-      - key: FRONTEND_URL
-        fromService:
-          type: web
-          name: resume-match-frontend
-          property: url
 
   - type: web
     name: resume-match-frontend
