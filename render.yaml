@@ -12,14 +12,15 @@ services:
         value: 3002
       - key: FRONTEND_URL
         fromService:
-          type: static
+          type: web
           name: resume-match-frontend
           property: url
 
-  - type: static
+  - type: web
     name: resume-match-frontend
     env: node
     buildCommand: cd client && npm install && npm run build && npm run export
+    startCommand: cd client && npx serve out
     staticPublishPath: client/out
     envVarGroup: ResumeMatchApp
     envVars:
