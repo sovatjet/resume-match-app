@@ -16,7 +16,10 @@ services:
     name: resume-match-frontend
     env: node
     buildCommand: |
+      ls -la
+      pwd
       cd client
+      ls -la
       npm install
       npm run build
       npm run export
