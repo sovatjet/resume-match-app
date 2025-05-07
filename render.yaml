@@ -10,8 +10,6 @@ services:
         value: production
       - key: PORT
         value: 3002
-      - key: HUGGINGFACE_API_KEY
-        sync: false
       - key: FRONTEND_URL
         fromService:
           type: static
