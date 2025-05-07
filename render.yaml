@@ -15,17 +15,8 @@ services:
     name: resume-match-frontend
     env: node
     rootDir: client
-    buildCommand: |
-      echo "Current directory: $(pwd)"
-      echo "Directory contents:"
-      ls -la
-      echo "Installing dependencies..."
-      npm install
-      echo "Building application..."
-      npm run build
-      echo "Build complete. Contents of out directory:"
-      ls -la out
-    staticPublishPath: out
+    buildCommand: cd client && npm install && npm run build
+    staticPublishPath: client/out
     envVars:
       - key: NODE_ENV
         value: production
