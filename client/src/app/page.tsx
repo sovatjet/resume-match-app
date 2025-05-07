@@ -27,7 +27,7 @@ interface ChatMessage {
   content: string;
 }
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://resume-match-backend.onrender.com';
+const API_BASE_URL = 'https://resume-match-backend.onrender.com';
 
 // Custom debounce hook
 function useDebounce<T extends (...args: any[]) => any>(
@@ -127,6 +127,7 @@ export default function Page() {
     try {
       console.log('Starting match request...');
       console.log('Files:', { resume: resume.name, jobDesc: jobDescFile.name });
+      console.log('API URL:', API_BASE_URL);
       
       const formData = new FormData();
       formData.append("resume", resume);
@@ -136,10 +137,17 @@ export default function Page() {
       const response = await fetch(`${API_BASE_URL}/api/match`, {
         method: "POST",
         body: formData,
-        signal: abortControllerRef.current.signal
+        signal: abortControllerRef.current.signal,
+        headers: {
+          'Accept': 'application/json',
+        },
+        mode: 'cors',
+        credentials: 'include'
       });
       
       console.log('Response status:', response.status);
+      console.log('Response headers:', Object.fromEntries(response.headers.entries()));
+      
       if (!response.ok) {
         const errorText = await response.text();
         console.error('Error response:', errorText);
