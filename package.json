@@ -1,0 +1,12 @@
+{
+  "name": "resume-match-app",
+  "version": "1.0.0",
+  "private": true,
+  "engines": {
+    "node": "18.19.1"
+  },
+  "workspaces": [
+    "client",
+    "server"
+  ]
+} 
