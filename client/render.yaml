@@ -2,12 +2,7 @@ services:
   - type: static
     name: resume-match-frontend
     env: node
-    buildCommand: |
-      pwd
-      ls -la
-      npm install
-      npm run build
-      npm run export
+    buildCommand: npm install && npm run build
     staticPublishPath: out
     envVars:
       - key: NODE_ENV
