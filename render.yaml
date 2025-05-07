@@ -20,8 +20,7 @@ services:
     name: resume-match-frontend
     env: node
     buildCommand: cd client && npm install && npm run build && npm run export
-    startCommand: cd client && npx serve out
-    staticPublishPath: client/out
+    startCommand: cd client && npx serve out -p $PORT
     envVarGroup: ResumeMatchApp
     envVars:
       - key: NEXT_PUBLIC_API_URL
@@ -30,4 +29,6 @@ services:
           name: resume-match-backend
           property: url
       - key: NODE_ENV
-        value: production 
+        value: production
+      - key: PORT
+        value: 3000 
