@@ -3,6 +3,7 @@ import React, { useState, useCallback, useMemo, useRef, useEffect } from "react"
 import { Grid, Typography, Box, Button, Paper, Container, List, ListItem, ListItemText, Divider, TextField, IconButton } from "@mui/material";
 import { useDropzone } from "react-dropzone";
 import SendIcon from '@mui/icons-material/Send';
+import { getApiUrl } from '../config/api';
 
 interface MatchResult {
   overallMatch: {
@@ -26,8 +27,6 @@ interface ChatMessage {
   role: 'user' | 'assistant';
   content: string;
 }
-
-const API_BASE_URL = 'https://resume-match-backend.onrender.com';
 
 // Custom debounce hook
 function useDebounce<T extends (...args: any[]) => any>(
@@ -127,14 +126,15 @@ export default function Page() {
     try {
       console.log('Starting match request...');
       console.log('Files:', { resume: resume.name, jobDesc: jobDescFile.name });
-      console.log('API URL:', API_BASE_URL);
       
       const formData = new FormData();
       formData.append("resume", resume);
       formData.append("jobDesc", jobDescFile);
       
-      console.log('Sending request to:', `${API_BASE_URL}/api/match`);
-      const response = await fetch(`${API_BASE_URL}/api/match`, {
+      const apiUrl = getApiUrl('match');
+      console.log('Sending request to:', apiUrl);
+      
+      const response = await fetch(apiUrl, {
         method: "POST",
         body: formData,
         signal: abortControllerRef.current.signal,
@@ -197,16 +197,20 @@ export default function Page() {
 
     try {
       console.log('Sending chat request:', { message: chatInput, matchResult: result });
-      const response = await fetch(`${API_BASE_URL}/api/chat`, {
+      const apiUrl = getApiUrl('chat');
+      const response = await fetch(apiUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Accept': 'application/json',
         },
         body: JSON.stringify({
           message: chatInput,
           matchResult: result
         }),
-        signal: abortControllerRef.current.signal
+        signal: abortControllerRef.current.signal,
+        mode: 'cors',
+        credentials: 'include'
       });
 
       console.log('Received response status:', response.status);
