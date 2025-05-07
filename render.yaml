@@ -19,6 +19,8 @@ services:
     buildCommand: |
       echo "Installing dependencies..."
       npm install --legacy-peer-deps
+      echo "Installing SWC dependencies..."
+      npm install @swc/core @swc/cli --save-dev
       echo "Building application..."
       npm run build
       echo "Build complete. Contents of out directory:"
