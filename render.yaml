@@ -15,8 +15,12 @@ services:
     name: resume-match-frontend
     env: node
     rootDir: client
-    buildCommand: cd client && npm install && npm run build
-    staticPublishPath: client/out
+    nodeVersion: 18.19.1
+    buildCommand: |
+      export NODE_ENV=production
+      npm install --legacy-peer-deps
+      npm run build
+    staticPublishPath: out
     envVars:
       - key: NODE_ENV
         value: production
