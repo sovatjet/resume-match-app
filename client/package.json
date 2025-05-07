@@ -17,7 +17,7 @@
     "@types/lodash": "^4.17.16",
     "formidable": "^3.5.4",
     "lodash": "^4.17.21",
-    "next": "^15.3.1",
+    "next": "14.1.0",
     "ollama": "^0.5.15",
     "openai": "^4.28.0",
     "react": "^18.2.0",
@@ -27,12 +27,14 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
-    "@types/node": "^22.15.14",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "eslint": "^9",
-    "eslint-config-next": "15.3.1",
+    "@types/node": "^20.11.19",
+    "@types/react": "^18.2.57",
+    "@types/react-dom": "^18.2.19",
+    "@types/webpack": "^5.28.5",
+    "eslint": "^8.56.0",
+    "eslint-config-next": "14.1.0",
     "swc-loader": "^0.2.6",
-    "typescript": "^5"
+    "typescript": "^5.3.3",
+    "webpack": "^5.90.3"
   }
 }
