@@ -1,0 +1,24 @@
+services:
+  - type: web
+    name: resume-match-backend
+    env: node
+    buildCommand: cd server && npm install
+    startCommand: cd server && npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 3002
+      - key: HUGGINGFACE_API_KEY
+        sync: false
+
+  - type: static
+    name: resume-match-frontend
+    buildCommand: cd client && npm install && npm run build
+    staticPublishPath: client/.next
+    envVars:
+      - key: NEXT_PUBLIC_API_URL
+        fromService:
+          type: web
+          name: resume-match-backend
+          property: url 
